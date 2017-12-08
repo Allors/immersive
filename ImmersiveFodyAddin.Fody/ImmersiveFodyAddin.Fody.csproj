@@ -5,8 +5,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <PackageReference Include="FodyCecil" Version="2.*" />
-    <PackageReference Include="PepitaPackage" Version="*" />
+    <PackageReference Include="FodyCecil" Version="2.2.1" />
+    <PackageReference Include="PepitaPackage" Version="1.21.6" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Compile Include="..\CommonAssemblyInfo.cs" />
