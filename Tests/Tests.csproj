@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net452;netcoreapp2.0</TargetFrameworks>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <PackageReference Include="FodyCecil" Version="2.*" />
+    <PackageReference Include="NUnit" Version="3.*" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.*" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.*" />
+    <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcess.csproj" />
+    <ProjectReference Include="..\ImmersiveFodyAddin.Fody\ImmersiveFodyAddin.Fody.csproj" />
+    <ProjectReference Include="..\ImmersiveFodyAddin\ImmersiveFodyAddin.csproj" />
+  </ItemGroup>
+</Project>
