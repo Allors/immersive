@@ -11,7 +11,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />
     <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcess.csproj" />
-    <ProjectReference Include="..\ImmersiveFodyAddin.Fody\ImmersiveFodyAddin.Fody.csproj" />
-    <ProjectReference Include="..\ImmersiveFodyAddin\ImmersiveFodyAddin.csproj" />
+    <ProjectReference Include="..\Immersive.Fody\Immersive.Fody.csproj" />
+    <ProjectReference Include="..\Immersive\Immersive.csproj" />
   </ItemGroup>
 </Project>

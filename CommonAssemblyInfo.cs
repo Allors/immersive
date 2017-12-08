@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
-[assembly: AssemblyTitle("ImmersiveFodyAddin")]
-[assembly: AssemblyProduct("ImmersiveFodyAddin")]
+
+[assembly: AssemblyTitle("Immersive")]
+[assembly: AssemblyProduct("Immersive")]
 [assembly: AssemblyVersion("1.0.0")]

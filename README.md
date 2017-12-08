@@ -1,7 +1,7 @@
 [![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg?style=flat)](https://gitter.im/Fody/Fody)
-[![NuGet Status](http://img.shields.io/nuget/v/ImmersiveFodyAddin.Fody.svg?style=flat)](https://www.nuget.org/packages/ImmersiveFodyAddin.Fody/)
+[![NuGet Status](http://img.shields.io/nuget/v/Immersive.Fody.svg?style=flat)](https://www.nuget.org/packages/Immersive.Fody/)
 
-![Icon](https://raw.github.com/Fody/ImmersiveFodyAddin/master/package_icon.png)
+![Icon](https://raw.github.com/Fody/Immersive/master/package_icon.png)
 
 This is a simple solution built as a starter for writing [Fody](https://github.com/Fody/Fody) addins.
 
@@ -13,10 +13,10 @@ See also [Fody usage](https://github.com/Fody/Fody#usage).
 
 ### NuGet installation
 
-Install the [ImmersiveFodyAddin.Fody NuGet package](https://nuget.org/packages/ImmersiveFodyAddin.Fody/) and update the [Fody NuGet package](https://nuget.org/packages/Fody/):
+Install the [Immersive.Fody NuGet package](https://nuget.org/packages/Immersive.Fody/) and update the [Fody NuGet package](https://nuget.org/packages/Fody/):
 
 ```
-PM> Install-Package ImmersiveFodyAddin.Fody
+PM> Install-Package Immersive.Fody
 PM> Update-Package Fody
 ```
 
@@ -25,12 +25,12 @@ The `Update-Package Fody` is required since NuGet always defaults to the oldest,
 
 ### Add to FodyWeavers.xml
 
-Add `<ImmersiveFodyAddin/>` to [FodyWeavers.xml](https://github.com/Fody/Fody#add-fodyweaversxml)
+Add `<Immersive/>` to [FodyWeavers.xml](https://github.com/Fody/Fody#add-fodyweaversxml)
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Weavers>
-  <ImmersiveFodyAddin/>
+  <Immersive/>
 </Weavers>
 ```
 
@@ -38,19 +38,19 @@ Add `<ImmersiveFodyAddin/>` to [FodyWeavers.xml](https://github.com/Fody/Fody#ad
 ## The moving parts
 
 
-### ImmersiveFodyAddin Project
+### Immersive Project
 
 A project that contains any classes used for compile time metadata. Generally any usage and reference to this is removed at compile time so it is not needed as part of application deployment.
 
 
-### ImmersiveFodyAddin.Fody Project
+### Immersive.Fody Project
 
 The project that does the weaving.
 
 
 #### Output of the project
 
-It outputs a file named ImmersiveFodyAddin.Fody. The '.Fody' suffix is necessary for it to be picked up by Fody.
+It outputs a file named Immersive.Fody. The '.Fody' suffix is necessary for it to be picked up by Fody.
 
 
 #### ModuleWeaver
@@ -74,7 +74,7 @@ See [ModuleWeaver](https://github.com/Fody/Fody/wiki/ModuleWeaver) for more deta
 
 #### Nuget construction
 
-Fody addins are deployed as [NuGet](http://nuget.org/) packages. The ImmersiveFodyAddin.Fody builds the package for ImmersiveFodyAddin as part of a build. The output of this project is placed in *SolutionDir*/nugets.
+Fody addins are deployed as [NuGet](http://nuget.org/) packages. The Immersive.Fody builds the package for Immersive as part of a build. The output of this project is placed in *SolutionDir*/nugets.
 
 This project uses [pepita](https://github.com/SimonCropp/Pepita) to construct the package but you could also any other mechanism for constructing a NuGet package.
 

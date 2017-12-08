@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8">
-    <id>ImmersiveFodyAddin.Fody</id>
+    <id>Immersive.Fody</id>
     <version>$version$</version>
-    <title>ImmersiveFodyAddin.Fody</title>
+    <title>Immersive.Fody</title>
     <authors>Simon Cropp</authors>
     <owners>Simon Cropp</owners>
     <developmentDependency>true</developmentDependency>
