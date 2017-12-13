@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SubstituteMethod.cs" company="allors bvba">
+// <copyright file="SubstituteClass.cs" company="allors bvba">
 //   Copyright 2008-2014 Allors bvba.
 //   
 //   This program is free software: you can redistribute it and/or modify
@@ -17,34 +17,22 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Binary.Attributes
+namespace Immersive
 {
     using System;
 
-    [AttributeUsage(AttributeTargets.Method)]
-    public class SubstituteMethodAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Class)]
+    public class SubstituteClassAttribute : Attribute
     {
-        private readonly Type _substitutableType;
-        private readonly string _substituableMethodName;
-
-        public SubstituteMethodAttribute(Type type)
+        public SubstituteClassAttribute()
         {
-            _substitutableType = type;
         }
 
-        public SubstituteMethodAttribute(Type type, string methodName) : this(type)
+        public SubstituteClassAttribute(Type substitutableType)
         {
-            _substituableMethodName = methodName;
+            this.SubstitutableType = substitutableType;
         }
 
-        public Type SubstitutableType
-        {
-            get { return _substitutableType; }
-        }
-
-        public string SubstituableMethodName
-        {
-            get { return _substituableMethodName; }
-        }
+        public Type SubstitutableType { get; }
     }
 }

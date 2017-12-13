@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SubstituteClass.cs" company="allors bvba">
+// <copyright file="SubstitutableAssembly.cs" company="allors bvba">
 //   Copyright 2008-2014 Allors bvba.
 //   
 //   This program is free software: you can redistribute it and/or modify
@@ -17,27 +17,38 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Binary.Attributes
+namespace Immersive.Fody
 {
-    using System;
+    using System.Collections;
 
-    [AttributeUsage(AttributeTargets.Class)]
-    public class SubstituteClassAttribute : Attribute
+    using Mono.Cecil;
+
+    public class SubstitutableAssembly : CollectionBase
     {
-        private readonly Type _substitutableType;
-
-        public SubstituteClassAttribute()
+        public SubstitutableAssembly(ModuleDefinition moduleDefinition)
         {
+            ////_assemblyDefinition.MainModule.LoadSymbols();
+            foreach (TypeDefinition typeDefinition in Helper.GetAllTypes(moduleDefinition))
+            {
+                if (!typeDefinition.IsInterface)
+                {
+                    var substitutableClass = new SubstitutableClass(moduleDefinition, typeDefinition);
+                    List.Add(substitutableClass);
+                }
+            }
         }
 
-        public SubstituteClassAttribute(Type substitutableType)
+        public SubstitutableClass this[int index]
         {
-            this._substitutableType = substitutableType;
+            get { return (SubstitutableClass)this.List[index]; }
         }
 
-        public Type SubstitutableType
+        public void Substitute(Substitutes substitutes)
         {
-            get { return _substitutableType; }
+            foreach (SubstitutableClass binaryType in this)
+            {
+                binaryType.Substitute(substitutes);
+            }
         }
     }
 }

@@ -11,6 +11,9 @@
     <Reference Include="System.Xml.Linq" />
     <Compile Include="..\CommonAssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Immersive\Immersive.csproj" />
+  </ItemGroup>
   <Target Name="BuildNugets" AfterTargets="CopyFilesToOutputDirectory">
     <ItemGroup>
       <FilesToDelete Include="$(SolutionDir)nugets\**\*.*" />
