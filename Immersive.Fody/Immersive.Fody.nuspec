@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8">
-    <id>Immersive.Fody</id>
+    <id>Allors.Immersive.Fody</id>
     <version>$version$</version>
-    <title>Immersive.Fody</title>
-    <authors>Simon Cropp</authors>
-    <owners>Simon Cropp</owners>
+    <title>Allors.Immersive.Fody</title>
+    <authors>Allors bvba</authors>
+    <owners>Allors bvba</owners>
     <developmentDependency>true</developmentDependency>
-    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <licenseUrl>https://opensource.org/licenses/lgpl-license</licenseUrl>
     <projectUrl>http://github.com/allors/immersive</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>https://raw.github.com/allors/immersive/master/package_icon.png</iconUrl>
-    <description>Immersive Fody add-in.</description>
+    <description>Immerse a library inside another library.</description>
     <summary />
     <language>en-US</language>
     <tags>ILWeaving, Fody, Cecil</tags>
