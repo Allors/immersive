@@ -1,4 +1,4 @@
-namespace Tests.Immersive
+namespace AssemblyToImmerse
 {
     public class Marker
     {

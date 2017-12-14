@@ -14,9 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyToProcess", "Assemb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Immersive", "Immersive\Immersive.csproj", "{9BCD4937-CB40-4AE1-B884-16F37D64B3C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Immersive", "Tests.Immersive\Tests.Immersive.csproj", "{164A804B-ACA5-4A95-B03A-24D27710D949}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyToImmerse", "AssemblyToImmerse\AssemblyToImmerse.csproj", "{164A804B-ACA5-4A95-B03A-24D27710D949}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Referenced", "Tests.Referenced\Tests.Referenced.csproj", "{64A291BE-8EAD-44D3-BB25-8AE4C1DFF41A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyReferenced", "AssemblyReferenced\AssemblyReferenced.csproj", "{64A291BE-8EAD-44D3-BB25-8AE4C1DFF41A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

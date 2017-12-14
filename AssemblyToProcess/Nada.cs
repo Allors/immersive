@@ -18,7 +18,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace AssemblyToProcess
 {
-    using global::Tests.Referenced;
+    using AssemblyReferenced;
 
     public class Nada
     {

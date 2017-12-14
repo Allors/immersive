@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Form.cs" company="allors bvba">
+// <copyright file="SealedSingle.cs" company="allors bvba">
 //   Copyright 2008-2014 Allors bvba.
 //   
 //   This program is free software: you can redistribute it and/or modify
@@ -16,24 +16,51 @@
 //   along with this program.  If not, see http://www.gnu.org/licenses.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Tests.Immersive
+namespace AssemblyToImmerse
 {
     using global::Immersive;
 
-    [SubstituteClass]
-    public class Form : Referenced.Form
+    [SubstituteClass(typeof(AssemblyReferenced.SealedSingle))]
+    public class SealedSingle
     {
-        public bool baseConstructorCalled = false;
 
-        public Form()
+        public string field;
+
+        private int intProperty;
+        private string property;
+
+        public int IntProperty
         {
-            baseConstructorCalled = true;
+            get
+            {
+                return intProperty;
+            }
+
+            set
+            {
+                intProperty = value;
+                property.ToString();
+            }
         }
 
-        [SubstituteMethod(typeof(Referenced.Form), "ShowDialog")]
-        public string AllorsShowDialog()
+        public string Property
         {
-            return "Substitute: " + ShowDialog();
+            get
+            {
+                return property;
+            }
+
+            set
+            {
+                property = value;
+                intProperty = int.Parse(value);
+            }
+        }
+
+        public SealedSingle()
+        {
+            field = "Substitute";
+            property = "Substitute";
         }
     }
 }

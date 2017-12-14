@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SealedSingle.cs" company="allors bvba">
+// <copyright file="Button.cs" company="allors bvba">
 //   Copyright 2008-2014 Allors bvba.
 //   
 //   This program is free software: you can redistribute it and/or modify
@@ -16,53 +16,12 @@
 //   along with this program.  If not, see http://www.gnu.org/licenses.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Tests.Immersive
+namespace AssemblyToImmerse
 {
-    using System;
+    using Immersive;
 
-    using global::Immersive;
-
-    [SubstituteClass(typeof(Referenced.SealedSingle))]
-    public class SealedSingle
+    [SubstituteClass]
+    public class Button : AssemblyReferenced.Button
     {
-
-        public string field;
-
-        private int intProperty;
-        private string property;
-
-        public int IntProperty
-        {
-            get
-            {
-                return intProperty;
-            }
-
-            set
-            {
-                intProperty = value;
-                property.ToString();
-            }
-        }
-
-        public string Property
-        {
-            get
-            {
-                return property;
-            }
-
-            set
-            {
-                property = value;
-                intProperty = int.Parse(value);
-            }
-        }
-
-        public SealedSingle()
-        {
-            field = "Substitute";
-            property = "Substitute";
-        }
     }
 }

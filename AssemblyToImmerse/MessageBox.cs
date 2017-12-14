@@ -17,47 +17,47 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Tests.Immersive
+namespace AssemblyToImmerse
 {
     using global::Immersive;
 
     public class MessageBox
     {
-        [SubstituteMethod(typeof(Referenced.MessageBox))]
+        [SubstituteMethod(typeof(AssemblyReferenced.MessageBox))]
         public static string Show(string text)
         {
-            return "Substitute: " + Referenced.MessageBox.Show(text);
+            return "Substitute: " + AssemblyReferenced.MessageBox.Show(text);
         }
 
-        [SubstituteMethod(typeof(Referenced.MessageBox))]
+        [SubstituteMethod(typeof(AssemblyReferenced.MessageBox))]
         public static string Show(int count)
         {
-            return "Substitute: " + Referenced.MessageBox.Show(count);
+            return "Substitute: " + AssemblyReferenced.MessageBox.Show(count);
         }
 
-        [SubstituteMethod(typeof(Referenced.MessageBox))]
+        [SubstituteMethod(typeof(AssemblyReferenced.MessageBox))]
         public static string Show(string text, int count)
         {
-            return "Substitute: " + Referenced.MessageBox.Show(text, count);
+            return "Substitute: " + AssemblyReferenced.MessageBox.Show(text, count);
         }
 
 
-        [SubstituteMethod(typeof(Referenced.MessageBox))]
+        [SubstituteMethod(typeof(AssemblyReferenced.MessageBox))]
         public static string Show2(string text)
         {
-            return "Substitute: " + Referenced.MessageBox.Show2(text);
+            return "Substitute: " + AssemblyReferenced.MessageBox.Show2(text);
         }
 
-        [SubstituteMethod(typeof(Referenced.MessageBox))]
+        [SubstituteMethod(typeof(AssemblyReferenced.MessageBox))]
         public static string Show2(int count)
         {
-            return "Substitute: " + Referenced.MessageBox.Show2(count);
+            return "Substitute: " + AssemblyReferenced.MessageBox.Show2(count);
         }
 
-        [SubstituteMethod(typeof(Referenced.MessageBox))]
+        [SubstituteMethod(typeof(AssemblyReferenced.MessageBox))]
         public static string Show2(string text, int count)
         {
-            return "Substitute: " + Referenced.MessageBox.Show2(text, count);
+            return "Substitute: " + AssemblyReferenced.MessageBox.Show2(text, count);
         }
 
     }

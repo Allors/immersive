@@ -16,7 +16,7 @@
 //   along with this program.  If not, see http://www.gnu.org/licenses.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Tests.Referenced
+namespace AssemblyReferenced
 {
     public class Form
     {

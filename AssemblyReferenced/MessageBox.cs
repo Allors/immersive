@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SealedHierarchy.cs" company="allors bvba">
+// <copyright file="MessageBox.cs" company="allors bvba">
 //   Copyright 2008-2014 Allors bvba.
 //   
 //   This program is free software: you can redistribute it and/or modify
@@ -16,47 +16,51 @@
 //   along with this program.  If not, see http://www.gnu.org/licenses.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Tests.Immersive
+
+namespace AssemblyReferenced
 {
-    using global::Immersive;
-
-    [SubstituteClass(typeof(Referenced.SealedAbstractClass))]
-    public class SealedAbstractClass
+    public class MessageBox
     {
-        public string abstractField;
-
-        private string abstractProperty;
-
-        public string AbstractProperty
+        public static string Show(bool boolean)
         {
-            get { return abstractProperty; }
-            set { abstractProperty = value; }
+            return "Referenced: Show(" + boolean + ")";
         }
 
-        public SealedAbstractClass()
+        public static string Show(string text)
         {
-            abstractField = "Substitute";
-            abstractProperty = "Substitute";
-        }
-    }
-    
-    [SubstituteClass(typeof(Referenced.SealedHierarchy))]
-    public class SealedHierarchy : SealedAbstractClass
-    {
-        public string field;
-
-        private string property;
-
-        public string Property
-        {
-            get { return property; }
-            set { property = value; }
+            return "Referenced: Show(" + text + ")";
         }
 
-        public SealedHierarchy()
+        public static string Show(int count)
         {
-            field = "Substitute";
-            property = "Substitute";
+            return "Referenced: Show(" + count + ")";
         }
+
+        public static string Show(string text, int count)
+        {
+            return "Referenced: Show(" + text + " " + count + ")";
+        }
+
+
+        public static string Show2(bool boolean)
+        {
+            return "Referenced: Show2(" + boolean + ")";
+        }
+
+        public static string Show2(string text)
+        {
+            return "Referenced: Show2(" + text + ")";
+        }
+
+        public static string Show2(int count)
+        {
+            return "Referenced: Show2(" + count + ")";
+        }
+
+        public static string Show2(string text, int count)
+        {
+            return "Referenced: Show2(" + text + " " + count + ")";
+        }
+
     }
 }

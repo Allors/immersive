@@ -18,88 +18,90 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace AssemblyToProcess
 {
-    using global::Tests.Referenced;
-
-    public partial class TestForm : Form
+    public partial class TestForm : AssemblyReferenced.Form
     {
         public bool constructorCalled = false;
 
-        private Button button1;
-        private TextBox textBox1;
-        private Tests.Referenced.Nada nada;
-        private SealedSingle sealedSingle;
-        private SealedHierarchy sealedHierarchy;
+        private AssemblyReferenced.Button button1;
+        private AssemblyReferenced.TextBox textBox1;
+        private AssemblyReferenced.Nada nada;
+        private AssemblyReferenced.SealedSingle sealedSingle;
+        private AssemblyReferenced.SealedHierarchy sealedHierarchy;
 
         public TestForm()
         {
             constructorCalled = true;
 
-            button1 = new Button();
-            textBox1 = new TextBox();
-            nada = new Tests.Referenced.Nada();
-            sealedSingle = new SealedSingle();
-            sealedHierarchy = new SealedHierarchy();
+            button1 = new AssemblyReferenced.Button();
+            textBox1 = new AssemblyReferenced.TextBox();
+            nada = new AssemblyReferenced.Nada();
+            sealedSingle = new AssemblyReferenced.SealedSingle();
+            sealedHierarchy = new AssemblyReferenced.SealedHierarchy();
         }
 
         public static string ShowMessageBox(bool boolean)
         {
-            return MessageBox.Show(boolean);
+            return AssemblyReferenced.MessageBox.Show(boolean);
         }
 
         public static string ShowMessageBox(string text)
         {
-            return MessageBox.Show(text);
+            return AssemblyReferenced.MessageBox.Show(text);
         }
 
         public static string ShowMessageBox(int integer)
         {
-            return MessageBox.Show(integer);
+            return AssemblyReferenced.MessageBox.Show(integer);
         }
 
         public static string ShowMessageBox(string text, int integer)
         {
-            return MessageBox.Show(text, integer);
+            return AssemblyReferenced.MessageBox.Show(text, integer);
         }
 
 
         public static string ShowMessageBox2(bool boolean)
         {
-            return MessageBox.Show2(boolean);
+            return AssemblyReferenced.MessageBox.Show2(boolean);
         }
 
         public static string ShowMessageBox2(string text)
         {
-            return MessageBox.Show2(text);
+            return AssemblyReferenced.MessageBox.Show2(text);
         }
 
         public static string ShowMessageBox2(int integer)
         {
-            return MessageBox.Show2(integer);
+            return AssemblyReferenced.MessageBox.Show2(integer);
         }
 
         public static string ShowMessageBox2(string text, int integer)
         {
-            return MessageBox.Show2(text, integer);
+            return AssemblyReferenced.MessageBox.Show2(text, integer);
         }
 
         #region Properties
-        public Button Button1
+        public AssemblyReferenced.Button Button1
         {
             get { return button1; }
         }
-        public TextBox TextBox1
+
+        public AssemblyReferenced.TextBox TextBox1
         {
             get { return textBox1; }
         }
-        public Tests.Referenced.Nada Nada
+
+        public AssemblyReferenced.Nada Nada
         {
             get { return nada; }
         }
-        public SealedSingle SealedSingle
+
+        public AssemblyReferenced.SealedSingle SealedSingle
         {
             get { return sealedSingle; }
         }
-        public SealedHierarchy SealedHierarchy
+
+        public AssemblyReferenced.SealedHierarchy SealedHierarchy
         {
             get { return sealedHierarchy; }
         }

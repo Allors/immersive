@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SealedHierarchy.cs" company="allors bvba">
+// <copyright file="Nada.cs" company="allors bvba">
 //   Copyright 2008-2014 Allors bvba.
 //   
 //   This program is free software: you can redistribute it and/or modify
@@ -16,40 +16,9 @@
 //   along with this program.  If not, see http://www.gnu.org/licenses.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Tests.Referenced
+namespace AssemblyReferenced
 {
-    using System;
-
-    public abstract class SealedAbstractClass
+    public class Nada
     {
-        public string abstractField;
-        
-        public string AbstractProperty
-        {
-            get { throw new Exception("This property should be sustituted!"); }
-            set { throw new Exception("This property should be sustituted!"); }
-        }
-
-        public SealedAbstractClass()
-        {
-            abstractField = "Referenced";
-        }
-    }
-        
-    public sealed class SealedHierarchy : SealedAbstractClass
-    {
-        public string field;
-
-       
-        public string Property
-        {
-            get { throw new Exception("This property should be sustituted!"); }
-            set { throw new Exception("This property should be sustituted!"); }
-        }
-
-        public SealedHierarchy()
-        {
-            field = "Referenced";
-        }
     }
 }

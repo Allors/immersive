@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Button.cs" company="allors bvba">
+// <copyright file="Form.cs" company="allors bvba">
 //   Copyright 2008-2014 Allors bvba.
 //   
 //   This program is free software: you can redistribute it and/or modify
@@ -16,9 +16,24 @@
 //   along with this program.  If not, see http://www.gnu.org/licenses.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Tests.Referenced
+namespace AssemblyToImmerse
 {
-    public class Button
+    using global::Immersive;
+
+    [SubstituteClass]
+    public class Form : AssemblyReferenced.Form
     {
+        public bool baseConstructorCalled = false;
+
+        public Form()
+        {
+            baseConstructorCalled = true;
+        }
+
+        [SubstituteMethod(typeof(AssemblyReferenced.Form), "ShowDialog")]
+        public string AllorsShowDialog()
+        {
+            return "Substitute: " + ShowDialog();
+        }
     }
 }

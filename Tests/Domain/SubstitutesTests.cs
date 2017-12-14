@@ -26,13 +26,14 @@ namespace Allors.Binary.Tests
 
     using NUnit.Framework;
 
+    [TestFixture]
     public class SubstitutesTests
     {
         private readonly Substitutes substitutes;
 
         public SubstitutesTests()
         {
-            var assemblyPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Tests.Immersive.dll");
+            var assemblyPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "AssemblyToImmerse.dll");
             using (var assemblyResolver = new DefaultAssemblyResolver())
             {
                 var directoryName = Path.GetDirectoryName(assemblyPath);
@@ -50,11 +51,11 @@ namespace Allors.Binary.Tests
         {
             Assert.AreEqual(5, this.substitutes.SubstituteClasses.Count);
 
-            var formSubstitute = this.substitutes.SubstituteClasses["Tests.Immersive.Form"];
-            var buttonSubstitute = this.substitutes.SubstituteClasses["Tests.Immersive.Button"];
-            var sealedSingleSubstitute = this.substitutes.SubstituteClasses["Tests.Immersive.SealedSingle"];
-            var sealedHierarchySubstitute = this.substitutes.SubstituteClasses["Tests.Immersive.SealedHierarchy"];
-            var sealedAbstractClassSubstitute = this.substitutes.SubstituteClasses["Tests.Immersive.SealedAbstractClass"];
+            var formSubstitute = this.substitutes.SubstituteClasses["AssemblyToImmerse.Form"];
+            var buttonSubstitute = this.substitutes.SubstituteClasses["AssemblyToImmerse.Button"];
+            var sealedSingleSubstitute = this.substitutes.SubstituteClasses["AssemblyToImmerse.SealedSingle"];
+            var sealedHierarchySubstitute = this.substitutes.SubstituteClasses["AssemblyToImmerse.SealedHierarchy"];
+            var sealedAbstractClassSubstitute = this.substitutes.SubstituteClasses["AssemblyToImmerse.SealedAbstractClass"];
 
             Assert.IsNotNull(formSubstitute);
             Assert.IsNotNull(buttonSubstitute);

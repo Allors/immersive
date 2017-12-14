@@ -1,7 +1,5 @@
 ﻿using System;
 
-using AssemblyToProcess;
-
 using NUnit.Framework;
 
 [TestFixture]

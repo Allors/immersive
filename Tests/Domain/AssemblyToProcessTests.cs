@@ -19,8 +19,6 @@
 namespace Allors.Binary.Tests
 {
     using System;
-    using System.IO;
-    using System.Reflection;
 
     using NUnit.Framework;
 
@@ -35,10 +33,10 @@ namespace Allors.Binary.Tests
 
             Assert.AreEqual("AssemblyToProcess.TestForm", testForm.GetType().FullName);
 
-            Assert.AreEqual("Tests.Referenced.Button", testForm.Button1.GetType().FullName);
-            Assert.AreEqual("Tests.Referenced.TextBox", testForm.TextBox1.GetType().FullName);
-            Assert.AreEqual("Tests.Referenced.SealedSingle", testForm.SealedSingle.GetType().FullName);
-            Assert.AreEqual("Tests.Referenced.SealedHierarchy", testForm.SealedHierarchy.GetType().FullName);
+            Assert.AreEqual("AssemblyReferenced.Button", testForm.Button1.GetType().FullName);
+            Assert.AreEqual("AssemblyReferenced.TextBox", testForm.TextBox1.GetType().FullName);
+            Assert.AreEqual("AssemblyReferenced.SealedSingle", testForm.SealedSingle.GetType().FullName);
+            Assert.AreEqual("AssemblyReferenced.SealedHierarchy", testForm.SealedHierarchy.GetType().FullName);
 
             var nadaType = Fixture.BeforeAssembly.GetType("AssemblyToProcess.Nada");
             var nada = (dynamic)Activator.CreateInstance(nadaType);

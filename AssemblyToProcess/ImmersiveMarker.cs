@@ -1,5 +1,5 @@
 #if(DEBUG)
-public class ImmersiveMarker : Tests.Immersive.Marker
+public class ImmersiveMarker : AssemblyToImmerse.Marker
 {
 }
 #endif

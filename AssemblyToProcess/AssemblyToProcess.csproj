@@ -4,7 +4,7 @@
     <TargetFrameworks>net452;netcoreapp2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tests.Immersive\Tests.Immersive.csproj" />
-    <ProjectReference Include="..\Tests.Referenced\Tests.Referenced.csproj" />
+    <ProjectReference Include="..\AssemblyReferenced\AssemblyReferenced.csproj" />
+    <ProjectReference Include="..\AssemblyToImmerse\AssemblyToImmerse.csproj" />
   </ItemGroup>
 </Project>

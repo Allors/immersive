@@ -10,9 +10,10 @@
     <PackageReference Include="NUnit" Version="3.9.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />
+    <ProjectReference Include="..\AssemblyReferenced\AssemblyReferenced.csproj" />
+    <ProjectReference Include="..\AssemblyToImmerse\AssemblyToImmerse.csproj" />
     <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcess.csproj" />
     <ProjectReference Include="..\Immersive.Fody\Immersive.Fody.csproj" />
     <ProjectReference Include="..\Immersive\Immersive.csproj" />
-    <ProjectReference Include="..\Tests.Immersive\Tests.Immersive.csproj" />
   </ItemGroup>
 </Project>

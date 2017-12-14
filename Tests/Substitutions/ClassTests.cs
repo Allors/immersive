@@ -22,7 +22,7 @@ public class ClassTests
         var sealedSingleFieldInfo = type.GetField("sealedSingle", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
         var sealedHierarchyFieldInfo = type.GetField("sealedHierarchy", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
 
-        Assert.AreEqual("Tests.Immersive.Form", instance.GetType().BaseType.FullName);
+        Assert.AreEqual("AssemblyToImmerse.Form", instance.GetType().BaseType.FullName);
 
         var constructorCalled = (bool)constructorCalledFieldInfo.GetValue(instance);
         Assert.IsTrue(constructorCalled);
@@ -33,24 +33,24 @@ public class ClassTests
         var assemblyConstructorCalled = (bool)assemblyConstructorCalledFieldInfo.GetValue(instance);
         Assert.IsTrue(assemblyConstructorCalled);
 
-        Assert.AreEqual("Tests.Referenced.Button", button1FieldInfo.FieldType.FullName);
+        Assert.AreEqual("AssemblyReferenced.Button", button1FieldInfo.FieldType.FullName);
         object button1 = button1FieldInfo.GetValue(instance);
-        Assert.AreEqual("Tests.Immersive.Button", button1.GetType().FullName);
+        Assert.AreEqual("AssemblyToImmerse.Button", button1.GetType().FullName);
 
-        Assert.AreEqual("Tests.Referenced.TextBox", textBox1FieldInfo.FieldType.FullName);
+        Assert.AreEqual("AssemblyReferenced.TextBox", textBox1FieldInfo.FieldType.FullName);
         object textBox1 = textBox1FieldInfo.GetValue(instance);
-        Assert.AreEqual("Tests.Referenced.TextBox", textBox1.GetType().FullName);
+        Assert.AreEqual("AssemblyReferenced.TextBox", textBox1.GetType().FullName);
 
-        Assert.AreEqual("Tests.Referenced.Nada", nadaFieldInfo.FieldType.FullName);
+        Assert.AreEqual("AssemblyReferenced.Nada", nadaFieldInfo.FieldType.FullName);
         object nada = nadaFieldInfo.GetValue(instance);
-        Assert.AreEqual("Tests.Referenced.Nada", nada.GetType().FullName);
+        Assert.AreEqual("AssemblyReferenced.Nada", nada.GetType().FullName);
 
-        Assert.AreEqual("Tests.Immersive.SealedSingle", sealedSingleFieldInfo.FieldType.FullName);
+        Assert.AreEqual("AssemblyToImmerse.SealedSingle", sealedSingleFieldInfo.FieldType.FullName);
         object sealedSingle = sealedSingleFieldInfo.GetValue(instance);
-        Assert.AreEqual("Tests.Immersive.SealedSingle", sealedSingle.GetType().FullName);
+        Assert.AreEqual("AssemblyToImmerse.SealedSingle", sealedSingle.GetType().FullName);
 
-        Assert.AreEqual("Tests.Immersive.SealedHierarchy", sealedHierarchyFieldInfo.FieldType.FullName);
+        Assert.AreEqual("AssemblyToImmerse.SealedHierarchy", sealedHierarchyFieldInfo.FieldType.FullName);
         object sealedHierarchy = sealedHierarchyFieldInfo.GetValue(instance);
-        Assert.AreEqual("Tests.Immersive.SealedHierarchy", sealedHierarchy.GetType().FullName);
+        Assert.AreEqual("AssemblyToImmerse.SealedHierarchy", sealedHierarchy.GetType().FullName);
     }
 }

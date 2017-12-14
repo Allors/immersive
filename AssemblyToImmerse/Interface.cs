@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TextBox.cs" company="allors bvba">
+// <copyright file="Interface.cs" company="allors bvba">
 //   Copyright 2008-2014 Allors bvba.
 //   
 //   This program is free software: you can redistribute it and/or modify
@@ -16,10 +16,9 @@
 //   along with this program.  If not, see http://www.gnu.org/licenses.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace Tests.Referenced
+namespace AssemblyToImmerse
 {
-    public class TextBox
+    public class Interface
     {
     }
 }
