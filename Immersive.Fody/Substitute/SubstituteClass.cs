@@ -29,7 +29,7 @@ namespace Immersive.Fody
         {
             this.TypeDefinition = typeDefinition;
 
-            var attribute = this.TypeDefinition.CustomAttributes.FirstOrDefault(v => v.AttributeType.Name.Equals(typeof(SubstituteClassAttribute).Name));
+            var attribute = this.TypeDefinition.CustomAttributes.FirstOrDefault(v => v.AttributeType.FullName.Equals(Attributes.SubstituteClassAttribute));
 
             if (attribute != null)
             {

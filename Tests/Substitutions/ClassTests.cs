@@ -1,56 +1,58 @@
 ﻿using System;
 using System.Reflection;
 
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class ClassTests
+namespace Immersive.Tests
 {
-    [Test]
-    public void Default()
+    public class ClassTests
     {
-        var type = Fixture.AfterAssembly.GetType("AssemblyToProcess.TestForm");
-        var instance = (dynamic)Activator.CreateInstance(type);
+        [Fact]
+        public void Default()
+        {
+            var type = Fixture.TestResult.Assembly.GetType("AssemblyToProcess.TestForm");
+            var instance = (dynamic)Activator.CreateInstance(type);
 
-        var constructorCalledFieldInfo = type.GetField("constructorCalled", BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
-        var baseConstructorCalledFieldInfo = type.GetField("baseConstructorCalled", BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
-        var assemblyConstructorCalledFieldInfo = type.GetField("assemblyConstructorCalled", BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
+            var constructorCalledFieldInfo = type.GetField("constructorCalled", BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
+            var baseConstructorCalledFieldInfo = type.GetField("baseConstructorCalled", BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
+            var assemblyConstructorCalledFieldInfo = type.GetField("assemblyConstructorCalled", BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
 
-        var button1FieldInfo = type.GetField("button1", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
-        var textBox1FieldInfo = type.GetField("textBox1", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
-        var nadaFieldInfo = type.GetField("nada", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
-        var sealedSingleFieldInfo = type.GetField("sealedSingle", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
-        var sealedHierarchyFieldInfo = type.GetField("sealedHierarchy", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
+            var button1FieldInfo = type.GetField("button1", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
+            var textBox1FieldInfo = type.GetField("textBox1", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
+            var nadaFieldInfo = type.GetField("nada", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
+            var sealedSingleFieldInfo = type.GetField("sealedSingle", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
+            var sealedHierarchyFieldInfo = type.GetField("sealedHierarchy", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
 
-        Assert.AreEqual("AssemblyToImmerse.Form", instance.GetType().BaseType.FullName);
+            Assert.Equal("AssemblyToImmerse.Form", instance.GetType().BaseType.FullName);
 
-        var constructorCalled = (bool)constructorCalledFieldInfo.GetValue(instance);
-        Assert.IsTrue(constructorCalled);
+            var constructorCalled = (bool)constructorCalledFieldInfo.GetValue(instance);
+            Assert.True(constructorCalled);
 
-        var baseConstructorCalled = (bool)baseConstructorCalledFieldInfo.GetValue(instance);
-        Assert.IsTrue(baseConstructorCalled);
+            var baseConstructorCalled = (bool)baseConstructorCalledFieldInfo.GetValue(instance);
+            Assert.True(baseConstructorCalled);
 
-        var assemblyConstructorCalled = (bool)assemblyConstructorCalledFieldInfo.GetValue(instance);
-        Assert.IsTrue(assemblyConstructorCalled);
+            var assemblyConstructorCalled = (bool)assemblyConstructorCalledFieldInfo.GetValue(instance);
+            Assert.True(assemblyConstructorCalled);
 
-        Assert.AreEqual("AssemblyReferenced.Button", button1FieldInfo.FieldType.FullName);
-        object button1 = button1FieldInfo.GetValue(instance);
-        Assert.AreEqual("AssemblyToImmerse.Button", button1.GetType().FullName);
+            Assert.Equal("AssemblyReferenced.Button", button1FieldInfo.FieldType.FullName);
+            object button1 = button1FieldInfo.GetValue(instance);
+            Assert.Equal("AssemblyToImmerse.Button", button1.GetType().FullName);
 
-        Assert.AreEqual("AssemblyReferenced.TextBox", textBox1FieldInfo.FieldType.FullName);
-        object textBox1 = textBox1FieldInfo.GetValue(instance);
-        Assert.AreEqual("AssemblyReferenced.TextBox", textBox1.GetType().FullName);
+            Assert.Equal("AssemblyReferenced.TextBox", textBox1FieldInfo.FieldType.FullName);
+            object textBox1 = textBox1FieldInfo.GetValue(instance);
+            Assert.Equal("AssemblyReferenced.TextBox", textBox1.GetType().FullName);
 
-        Assert.AreEqual("AssemblyReferenced.Nada", nadaFieldInfo.FieldType.FullName);
-        object nada = nadaFieldInfo.GetValue(instance);
-        Assert.AreEqual("AssemblyReferenced.Nada", nada.GetType().FullName);
+            Assert.Equal("AssemblyReferenced.Nada", nadaFieldInfo.FieldType.FullName);
+            object nada = nadaFieldInfo.GetValue(instance);
+            Assert.Equal("AssemblyReferenced.Nada", nada.GetType().FullName);
 
-        Assert.AreEqual("AssemblyToImmerse.SealedSingle", sealedSingleFieldInfo.FieldType.FullName);
-        object sealedSingle = sealedSingleFieldInfo.GetValue(instance);
-        Assert.AreEqual("AssemblyToImmerse.SealedSingle", sealedSingle.GetType().FullName);
+            Assert.Equal("AssemblyToImmerse.SealedSingle", sealedSingleFieldInfo.FieldType.FullName);
+            object sealedSingle = sealedSingleFieldInfo.GetValue(instance);
+            Assert.Equal("AssemblyToImmerse.SealedSingle", sealedSingle.GetType().FullName);
 
-        Assert.AreEqual("AssemblyToImmerse.SealedHierarchy", sealedHierarchyFieldInfo.FieldType.FullName);
-        object sealedHierarchy = sealedHierarchyFieldInfo.GetValue(instance);
-        Assert.AreEqual("AssemblyToImmerse.SealedHierarchy", sealedHierarchy.GetType().FullName);
+            Assert.Equal("AssemblyToImmerse.SealedHierarchy", sealedHierarchyFieldInfo.FieldType.FullName);
+            object sealedHierarchy = sealedHierarchyFieldInfo.GetValue(instance);
+            Assert.Equal("AssemblyToImmerse.SealedHierarchy", sealedHierarchy.GetType().FullName);
+        }
     }
 }

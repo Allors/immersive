@@ -1,13 +1,19 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
+using Xunit;
 
-[TestFixture]
-public class AssemblyTests
+namespace Immersive.Tests
 {
-    [Test]
-    public void PeVerify()
+    public class AssemblyTests
     {
-#if (DEBUG && NET452)
-        Verifier.Verify(Fixture.BeforeAssemblyPath, Fixture.AfterAssemblyPath);
+        [Fact]
+        public void PeVerify()
+        {
+#if (DEBUG && NET46)
+            var beforeAssemblyPath = new DirectoryInfo(".").FullName;
+            var afterAssemblyPath = new FileInfo(Fixture.TestResult.AssemblyPath).Directory.FullName;
+
+            Verifier.Verify(beforeAssemblyPath, afterAssemblyPath);
 #endif
+        }
     }
 }

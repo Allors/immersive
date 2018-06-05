@@ -1,62 +1,27 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using Fody;
+using Xunit;
+#pragma warning disable 618
 
-using Mono.Cecil;
-
-using NUnit.Framework;
-
-public static class Fixture
+namespace Immersive.Tests
 {
-    public static string BeforeAssemblyPath;
-    public static readonly Assembly BeforeAssembly;
-
-    public static string AfterAssemblyPath;
-    public static readonly Assembly AfterAssembly;
-
-    public static List<string> Infos;
-    public static List<string> Errors;
-
-    static Fixture()
+    public static class Fixture
     {
-        Infos = new List<string>();
-        Errors = new List<string>();
+        public static TestResult TestResult;
 
-        BeforeAssemblyPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "AssemblyToProcess.dll");
-        BeforeAssembly = Assembly.LoadFile(BeforeAssemblyPath);
+        public static Assembly BeforeAssembly;
 
-        AfterAssemblyPath = BeforeAssemblyPath.Replace(".dll", "2.dll");
-        File.Copy(BeforeAssemblyPath, AfterAssemblyPath, true);
-       
-        using (var assemblyResolver = new DefaultAssemblyResolver())
+        static Fixture()
         {
-            var directoryName = Path.GetDirectoryName(BeforeAssemblyPath);
-            assemblyResolver.AddSearchDirectory(directoryName);
+            var weavingTask = new ModuleWeaver();
+            TestResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll");
 
-            using (var moduleDefinition = ModuleDefinition.ReadModule(BeforeAssemblyPath))
-            {
-                var weavingTask = new ModuleWeaver
-                                      {
-                                          ModuleDefinition = moduleDefinition,
-                                          AssemblyResolver = assemblyResolver,
-                                          LogInfo = v =>
-                                              {
-                                                  Infos.Add(v);
-                                                  Trace.TraceInformation(v);
-                                              },
-                                          LogError = v =>
-                                              {
-                                                  Errors.Add(v);
-                                                  Trace.TraceError(v);
-                                              },
-                };
-
-                weavingTask.Execute();
-                moduleDefinition.Write(AfterAssemblyPath);
-            }
+            var path = new DirectoryInfo(".").GetFiles("AssemblyToProcess.dll").First().FullName;
+            BeforeAssembly = Assembly.LoadFrom(path);
         }
 
-        AfterAssembly = Assembly.LoadFile(AfterAssemblyPath);
     }
 }

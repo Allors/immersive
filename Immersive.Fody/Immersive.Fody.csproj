@@ -1,30 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net452;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+	 <DebugType>portable</DebugType>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <PackageReference Include="FodyCecil" Version="2.2.1" />
-    <PackageReference Include="PepitaPackage" Version="1.21.6" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-    <Compile Include="..\CommonAssemblyInfo.cs" />
+    <PackageReference Include="FodyHelpers" Version="3.0.3" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Immersive\Immersive.csproj" />
-  </ItemGroup>
-  <Target Name="BuildNugets" AfterTargets="CopyFilesToOutputDirectory">
-    <ItemGroup>
-      <FilesToDelete Include="$(SolutionDir)nugets\**\*.*" />
-    </ItemGroup>
-    <Delete Files="@(FilesToDelete)" />
-    <MakeDir Directories="$(SolutionDir)nugets" />
-    <Copy SourceFiles="$(SolutionDir)Immersive\bin\$(ConfigurationName)\net452\Immersive.dll" DestinationFolder="$(SolutionDir)nugets\lib\net452" />
-    <Copy SourceFiles="$(SolutionDir)Immersive\bin\$(ConfigurationName)\netstandard1.4\Immersive.dll" DestinationFolder="$(SolutionDir)nugets\lib\netstandard1.4" />
-    <Copy SourceFiles="$(ProjectDir)Immersive.Fody.nuspec" DestinationFolder="$(SolutionDir)nugets" />
-    <Copy SourceFiles="$(ProjectDir)bin\$(ConfigurationName)\net452\Immersive.Fody.dll" DestinationFolder="$(SolutionDir)nugets" />
-    <Copy SourceFiles="$(ProjectDir)bin\$(ConfigurationName)\net452\Immersive.Fody.pdb" DestinationFolder="$(SolutionDir)nugets" />
-    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)nugets" MetadataAssembly="$(OutputPath)Immersive.Fody.dll" />
-  </Target>
 </Project>

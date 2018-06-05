@@ -16,7 +16,7 @@
 //   along with this program.  If not, see http://www.gnu.org/licenses.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Allors.Binary.Tests
+namespace Immersive.Tests
 {
     using System.IO;
 
@@ -24,16 +24,15 @@ namespace Allors.Binary.Tests
 
     using Mono.Cecil;
 
-    using NUnit.Framework;
+    using Xunit;
 
-    [TestFixture]
     public class SubstitutesTests
     {
         private readonly Substitutes substitutes;
 
         public SubstitutesTests()
         {
-            var assemblyPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "AssemblyToImmerse.dll");
+            var assemblyPath = new DirectoryInfo("AssemblyToImmerse.dll").FullName;
             using (var assemblyResolver = new DefaultAssemblyResolver())
             {
                 var directoryName = Path.GetDirectoryName(assemblyPath);
@@ -46,10 +45,10 @@ namespace Allors.Binary.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void Default()
         {
-            Assert.AreEqual(5, this.substitutes.SubstituteClasses.Count);
+            Assert.Equal(5, this.substitutes.SubstituteClasses.Count);
 
             var formSubstitute = this.substitutes.SubstituteClasses["AssemblyToImmerse.Form"];
             var buttonSubstitute = this.substitutes.SubstituteClasses["AssemblyToImmerse.Button"];
@@ -57,11 +56,11 @@ namespace Allors.Binary.Tests
             var sealedHierarchySubstitute = this.substitutes.SubstituteClasses["AssemblyToImmerse.SealedHierarchy"];
             var sealedAbstractClassSubstitute = this.substitutes.SubstituteClasses["AssemblyToImmerse.SealedAbstractClass"];
 
-            Assert.IsNotNull(formSubstitute);
-            Assert.IsNotNull(buttonSubstitute);
-            Assert.IsNotNull(sealedSingleSubstitute);
-            Assert.IsNotNull(sealedHierarchySubstitute);
-            Assert.IsNotNull(sealedAbstractClassSubstitute);
+            Assert.NotNull(formSubstitute);
+            Assert.NotNull(buttonSubstitute);
+            Assert.NotNull(sealedSingleSubstitute);
+            Assert.NotNull(sealedHierarchySubstitute);
+            Assert.NotNull(sealedAbstractClassSubstitute);
         }
     }
 }

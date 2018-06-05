@@ -1,36 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
-
+using Fody;
 using Immersive.Fody;
-using Mono.Cecil;
 
-public class ModuleWeaver
+public class ModuleWeaver : BaseModuleWeaver
 {
-    public XElement Config { get; set; }
-    
-    public Action<string> LogInfo { get; set; }
-
-    public Action<string> LogError { get; set; }
-
-    public IAssemblyResolver AssemblyResolver { get; set; }
-
-    public ModuleDefinition ModuleDefinition { get; set; }
-
-    public TypeSystem TypeSystem { get; set; }
-
-    // Init logging delegates to make testing easier
-    public ModuleWeaver()
+    public override IEnumerable<string> GetAssembliesForScanning()
     {
-        this.LogInfo = m => { };
-        this.LogError = m => { };
+        yield return "netstandard";
+        yield return "mscorlib";
     }
 
-    public void Execute()
+    public override void Execute()
     {
-        this.TypeSystem = this.ModuleDefinition.TypeSystem;
-
         var substitutableAssembly = new SubstitutableAssembly(this.ModuleDefinition);
 
         var immersiveType = this.ModuleDefinition.Types.FirstOrDefault(v => v.Name.Equals("ImmersiveMarker") && v.IsClass);
@@ -41,7 +23,7 @@ public class ModuleWeaver
         else
         {
             var references = this.ModuleDefinition.AssemblyReferences
-                .Select(v => this.AssemblyResolver.Resolve(v).MainModule)
+                .Select(v => this.ResolveAssembly(v.FullName).MainModule)
                 .ToArray();
 
             var module = references.FirstOrDefault(v => v.Types.Any(w => w.FullName.Equals(immersiveType.BaseType.FullName)));
@@ -49,7 +31,7 @@ public class ModuleWeaver
 
             substitutableAssembly.Substitute(substitutes);
 
-            this.LogInfo(module.Name + " immersed in " + this.ModuleDefinition.Name + ".");
+            this.LogInfo(module?.Name + " immersed in " + this.ModuleDefinition.Name + ".");
         }
     }
 }

@@ -16,27 +16,26 @@
 //   along with this program.  If not, see http://www.gnu.org/licenses.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Allors.Binary.Tests
+namespace Immersive.Tests
 {
     using System;
 
-    using NUnit.Framework;
+    using Xunit;
 
-    [TestFixture]
     public class AssemblyToProcessTests
     {
-        [Test]
+        [Fact]
         public void Default()
         {
             var testFormType = Fixture.BeforeAssembly.GetType("AssemblyToProcess.TestForm");
             var testForm = (dynamic)Activator.CreateInstance(testFormType);
 
-            Assert.AreEqual("AssemblyToProcess.TestForm", testForm.GetType().FullName);
+            Assert.Equal("AssemblyToProcess.TestForm", testForm.GetType().FullName);
 
-            Assert.AreEqual("AssemblyReferenced.Button", testForm.Button1.GetType().FullName);
-            Assert.AreEqual("AssemblyReferenced.TextBox", testForm.TextBox1.GetType().FullName);
-            Assert.AreEqual("AssemblyReferenced.SealedSingle", testForm.SealedSingle.GetType().FullName);
-            Assert.AreEqual("AssemblyReferenced.SealedHierarchy", testForm.SealedHierarchy.GetType().FullName);
+            Assert.Equal("AssemblyReferenced.Button", testForm.Button1.GetType().FullName);
+            Assert.Equal("AssemblyReferenced.TextBox", testForm.TextBox1.GetType().FullName);
+            Assert.Equal("AssemblyReferenced.SealedSingle", testForm.SealedSingle.GetType().FullName);
+            Assert.Equal("AssemblyReferenced.SealedHierarchy", testForm.SealedHierarchy.GetType().FullName);
 
             var nadaType = Fixture.BeforeAssembly.GetType("AssemblyToProcess.Nada");
             var nada = (dynamic)Activator.CreateInstance(nadaType);

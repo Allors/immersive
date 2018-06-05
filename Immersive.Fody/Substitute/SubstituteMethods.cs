@@ -38,7 +38,7 @@ namespace Immersive.Fody
                 {
                     foreach (CustomAttribute customAttribute in methodDefinition.CustomAttributes)
                     {
-                        if (customAttribute.Constructor.DeclaringType.FullName.Equals(typeof(SubstituteMethodAttribute).FullName))
+                        if (customAttribute.Constructor.DeclaringType.FullName.Equals(Attributes.SubstituteMethodAttribute))
                         {
                             SubstituteMethod substitute = new SubstituteMethod(methodDefinition, customAttribute);
                             List.Add(substitute);

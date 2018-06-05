@@ -1,32 +1,33 @@
 ﻿using System;
+using Xunit;
 
-using NUnit.Framework;
-
-[TestFixture]
-public class MethodTests
+namespace Immersive.Tests
 {
-    [Test]
-    public void SubstituteWithType()
+    public class MethodTests
     {
-        var type = Fixture.AfterAssembly.GetType("AssemblyToProcess.TestForm");
+        [Fact]
+        public void SubstituteWithType()
+        {
+            var type = Fixture.TestResult.Assembly.GetType("AssemblyToProcess.TestForm");
 
-        Assert.AreEqual("Referenced: Show(False)", type.GetMethod("ShowMessageBox", new[] { typeof(bool) }).Invoke(null, new object[] { false }));
+            Assert.Equal("Referenced: Show(False)", type.GetMethod("ShowMessageBox", new[] { typeof(bool) }).Invoke(null, new object[] { false }));
 
-        Assert.AreEqual("Substitute: Referenced: Show(Test)", type.GetMethod("ShowMessageBox", new[] { typeof(string) }).Invoke(null, new object[] { "Test" }));
-        Assert.AreEqual("Substitute: Referenced: Show(0)", type.GetMethod("ShowMessageBox", new[] { typeof(int) }).Invoke(null, new object[] { 0 }));
-        Assert.AreEqual("Substitute: Referenced: Show(Test 0)", type.GetMethod("ShowMessageBox", new[] { typeof(string), typeof(int) }).Invoke(null, new object[] { "Test", 0 }));
+            Assert.Equal("Substitute: Referenced: Show(Test)", type.GetMethod("ShowMessageBox", new[] { typeof(string) }).Invoke(null, new object[] { "Test" }));
+            Assert.Equal("Substitute: Referenced: Show(0)", type.GetMethod("ShowMessageBox", new[] { typeof(int) }).Invoke(null, new object[] { 0 }));
+            Assert.Equal("Substitute: Referenced: Show(Test 0)", type.GetMethod("ShowMessageBox", new[] { typeof(string), typeof(int) }).Invoke(null, new object[] { "Test", 0 }));
 
-        Assert.AreEqual("Substitute: Referenced: Show2(Test)", type.GetMethod("ShowMessageBox2", new[] { typeof(string) }).Invoke(null, new object[] { "Test" }));
-        Assert.AreEqual("Substitute: Referenced: Show2(0)", type.GetMethod("ShowMessageBox2", new[] { typeof(int) }).Invoke(null, new object[] { 0 }));
-        Assert.AreEqual("Substitute: Referenced: Show2(Test 0)", type.GetMethod("ShowMessageBox2", new[] { typeof(string), typeof(int) }).Invoke(null, new object[] { "Test", 0 }));
-    }
+            Assert.Equal("Substitute: Referenced: Show2(Test)", type.GetMethod("ShowMessageBox2", new[] { typeof(string) }).Invoke(null, new object[] { "Test" }));
+            Assert.Equal("Substitute: Referenced: Show2(0)", type.GetMethod("ShowMessageBox2", new[] { typeof(int) }).Invoke(null, new object[] { 0 }));
+            Assert.Equal("Substitute: Referenced: Show2(Test 0)", type.GetMethod("ShowMessageBox2", new[] { typeof(string), typeof(int) }).Invoke(null, new object[] { "Test", 0 }));
+        }
 
-    [Test]
-    public void SubstituteWithTypeAndMethodName()
-    {
-        var type = Fixture.AfterAssembly.GetType("AssemblyToProcess.TestForm");
-        var instance = (dynamic)Activator.CreateInstance(type);
+        [Fact]
+        public void SubstituteWithTypeAndMethodName()
+        {
+            var type = Fixture.TestResult.Assembly.GetType("AssemblyToProcess.TestForm");
+            var instance = (dynamic)Activator.CreateInstance(type);
 
-        Assert.AreEqual("Substitute: Referenced: ShowDialog()", instance.CallShowDialog());
+            Assert.Equal("Substitute: Referenced: ShowDialog()", instance.CallShowDialog());
+        }
     }
 }
