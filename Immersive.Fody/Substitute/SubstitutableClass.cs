@@ -26,13 +26,17 @@ namespace Immersive.Fody
 
     public class SubstitutableClass
     {
-        private readonly ModuleDefinition moduleDefinition;
-
-        public SubstitutableClass(ModuleDefinition moduleDefinition, TypeDefinition typeDefinition)
+        public SubstitutableClass(ModuleWeaver moduleWeaver, TypeDefinition typeDefinition)
         {
-            this.moduleDefinition = moduleDefinition;
+            this.ModuleWeaver = moduleWeaver;
             this.TypeDefinition = typeDefinition;
+
+            this.ModuleWeaver.LogInfo($"Substitutable: ${this.TypeDefinition.FullName}");
         }
+
+        public ModuleWeaver ModuleWeaver { get; }
+
+        public ModuleDefinition ModuleDefinition => this.ModuleWeaver.ModuleDefinition;
 
         public TypeDefinition TypeDefinition { get; }
 
@@ -75,7 +79,7 @@ namespace Immersive.Fody
                                 if (operand.Name.Equals(".ctor"))
                                 {
                                     var substituteConstructorDefinition = substitute.Contructor;
-                                    var substituteConstructorReference = this.moduleDefinition.ImportReference(substituteConstructorDefinition);
+                                    var substituteConstructorReference = this.ModuleDefinition.ImportReference(substituteConstructorDefinition);
                                     instruction.Operand = substituteConstructorReference;
                                 }
                             }
@@ -103,7 +107,7 @@ namespace Immersive.Fody
                             if (substitute != null)
                             {
                                 var substituteConstructorDefinition = substitute.Contructor;
-                                var substituteConstructorReference = this.moduleDefinition.ImportReference(substituteConstructorDefinition);
+                                var substituteConstructorReference = this.ModuleDefinition.ImportReference(substituteConstructorDefinition);
                                 instruction.Operand = substituteConstructorReference;
                             }
                         }
@@ -119,7 +123,7 @@ namespace Immersive.Fody
 
             if (substitute != null)
             {
-                var substituteTypeReference = this.moduleDefinition.ImportReference(substitute.TypeDefinition);
+                var substituteTypeReference = this.ModuleDefinition.ImportReference(substitute.TypeDefinition);
                 this.TypeDefinition.BaseType = substituteTypeReference;
             }
         }
@@ -144,7 +148,7 @@ namespace Immersive.Fody
                             var substitute = substitutes.SubstituteMethods.Lookup(methodReference);
                             if (substitute != null)
                             {
-                                var substituteMethodReference = this.moduleDefinition.ImportReference(substitute.MethodDefinition);
+                                var substituteMethodReference = this.ModuleDefinition.ImportReference(substitute.MethodDefinition);
                                 instruction.Operand = substituteMethodReference;
                             }
                             else
@@ -152,7 +156,7 @@ namespace Immersive.Fody
                                 var declaringClassSubstitute = substitutes.SubstituteClasses.LookupBySubstitutableFullName(methodReference.DeclaringType.FullName);
                                 if (declaringClassSubstitute != null && !declaringClassSubstitute.IsBaseSubsitution)
                                 {
-                                    var classSubstitueReference = this.moduleDefinition.ImportReference(declaringClassSubstitute.TypeDefinition);
+                                    var classSubstitueReference = this.ModuleDefinition.ImportReference(declaringClassSubstitute.TypeDefinition);
                                     methodReference.DeclaringType = classSubstitueReference;
                                 }
                             }
@@ -171,7 +175,7 @@ namespace Immersive.Fody
 
                 if (substitute != null && !substitute.IsBaseSubsitution)
                 {
-                    var substituteTypeReference = this.moduleDefinition.ImportReference(substitute.TypeDefinition);
+                    var substituteTypeReference = this.ModuleDefinition.ImportReference(substitute.TypeDefinition);
                     field.FieldType = substituteTypeReference;
                 }
             }
@@ -192,7 +196,7 @@ namespace Immersive.Fody
 
                         if (substitute != null && !substitute.IsBaseSubsitution)
                         {
-                            var substituteTypeReference = this.moduleDefinition.ImportReference(substitute.TypeDefinition);
+                            var substituteTypeReference = this.ModuleDefinition.ImportReference(substitute.TypeDefinition);
                             variableDefinition.VariableType = substituteTypeReference;
                         }
                     }
@@ -211,7 +215,7 @@ namespace Immersive.Fody
 
                 if (substitute != null && !substitute.IsBaseSubsitution)
                 {
-                    var substituteTypeReference = this.moduleDefinition.ImportReference(substitute.TypeDefinition);
+                    var substituteTypeReference = this.ModuleDefinition.ImportReference(substitute.TypeDefinition);
                     method.ReturnType = substituteTypeReference;
                 }
             }

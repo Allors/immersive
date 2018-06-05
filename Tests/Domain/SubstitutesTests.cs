@@ -40,7 +40,7 @@ namespace Immersive.Tests
 
                 using (var moduleDefinition = ModuleDefinition.ReadModule(assemblyPath))
                 {
-                    this.substitutes = new Substitutes(moduleDefinition);
+                    this.substitutes = new Substitutes(Fixture.ModuleWeaver, moduleDefinition);
                 }
             }
         }

@@ -25,8 +25,9 @@ namespace Immersive.Fody
 
     public class SubstituteClass
     {
-        public SubstituteClass(TypeDefinition typeDefinition)
+        public SubstituteClass(ModuleWeaver moduleWeaver, TypeDefinition typeDefinition)
         {
+            this.ModuleWeaver = moduleWeaver;
             this.TypeDefinition = typeDefinition;
 
             var attribute = this.TypeDefinition.CustomAttributes.FirstOrDefault(v => v.AttributeType.FullName.Equals(Attributes.SubstituteClassAttribute));
@@ -51,7 +52,11 @@ namespace Immersive.Fody
                     this.SubstitutableFullName = typeDefinition.BaseType.FullName;
                 }
             }
+
+            this.ModuleWeaver.LogInfo($"SubstituteClass: ${this.SubstitutableFullName}");
         }
+
+        public ModuleWeaver ModuleWeaver { get; }
 
         public TypeDefinition TypeDefinition { get; }
 

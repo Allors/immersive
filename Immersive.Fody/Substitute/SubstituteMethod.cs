@@ -23,44 +23,49 @@ namespace Immersive.Fody
 
     public class SubstituteMethod
     {
-        private readonly MethodDefinition methodDefinition;
-        private readonly string fullTypeName;
-        private readonly string methodName;
-
-        public SubstituteMethod(MethodDefinition methodDefinition, CustomAttribute customAttribute)
+        public SubstituteMethod(ModuleWeaver moduleWeaver, MethodDefinition methodDefinition, CustomAttribute customAttribute)
         {
-            this.methodDefinition = methodDefinition;
-            TypeReference typeDefinition = (TypeReference)customAttribute.ConstructorArguments[0].Value;
-            this.fullTypeName = typeDefinition.FullName;
+            this.ModuleWeaver = moduleWeaver;
+
+            this.Definition = methodDefinition;
+            var typeDefinition = (TypeReference)customAttribute.ConstructorArguments[0].Value;
+            this.FullTypeName = typeDefinition.FullName;
             
-            this.methodName = methodDefinition.Name;
+            this.MethodName = methodDefinition.Name;
             if (customAttribute.ConstructorArguments.Count > 1)
             {
-                this.methodName = (string)customAttribute.ConstructorArguments[1].Value;
+                this.MethodName = (string)customAttribute.ConstructorArguments[1].Value;
             }
+
+            this.ModuleWeaver.LogInfo($"SubstituteMethod: ${this.FullTypeName}.${this.MethodName}");
         }
 
-        public MethodDefinition MethodDefinition
-        {
-            get { return this.methodDefinition; }
-        }
+        public ModuleWeaver ModuleWeaver { get; }
+
+        public MethodDefinition Definition { get; }
+
+        public string FullTypeName { get; }
+
+        public string MethodName { get; }
+
+        public MethodDefinition MethodDefinition => this.Definition;
 
         public override string ToString()
         {
-            return this.methodDefinition.ToString();
+            return this.Definition.ToString();
         }
 
         internal bool Matches(MethodReference operand)
         {
-            if (this.methodName.Equals(operand.Name))
+            if (this.MethodName.Equals(operand.Name))
             {
-                if (this.fullTypeName.Equals(operand.DeclaringType.FullName))
+                if (this.FullTypeName.Equals(operand.DeclaringType.FullName))
                 {
-                    if (this.methodDefinition.Parameters.Count == operand.Parameters.Count)
+                    if (this.Definition.Parameters.Count == operand.Parameters.Count)
                     {
-                        for (int i = 0; i < this.methodDefinition.Parameters.Count; i++)
+                        for (int i = 0; i < this.Definition.Parameters.Count; i++)
                         {
-                            if (!this.methodDefinition.Parameters[i].ParameterType.FullName.Equals(operand.Parameters[i].ParameterType.FullName))
+                            if (!this.Definition.Parameters[i].ParameterType.FullName.Equals(operand.Parameters[i].ParameterType.FullName))
                             {
                                 return false;
                             }

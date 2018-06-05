@@ -23,23 +23,20 @@ namespace Immersive.Fody
 
     public class Substitutes
     {
-        private readonly SubstituteClasses substituteClasses;
-        private readonly SubstituteMethods substituteMethods;
-
-        public Substitutes(ModuleDefinition moduleDefinition)
+        public Substitutes(ModuleWeaver moduleWeaver, ModuleDefinition moduleDefinition)
         {
-            this.substituteClasses = new SubstituteClasses(moduleDefinition);
-            this.substituteMethods = new SubstituteMethods(moduleDefinition);
+            this.ModuleWeaver = moduleWeaver;
+
+            this.ModuleWeaver.LogInfo($"Substitutes: ${moduleDefinition.Assembly.FullName}");
+            
+            this.SubstituteClasses = new SubstituteClasses(moduleWeaver, moduleDefinition);
+            this.SubstituteMethods = new SubstituteMethods(moduleWeaver, moduleDefinition);
         }
 
-        public SubstituteClasses SubstituteClasses
-        {
-            get { return this.substituteClasses; }
-        }
+        public ModuleWeaver ModuleWeaver { get; set; }
 
-        public SubstituteMethods SubstituteMethods
-        {
-            get { return this.substituteMethods; }
-        }
+        public SubstituteClasses SubstituteClasses { get; }
+
+        public SubstituteMethods SubstituteMethods { get; }
     }
 }

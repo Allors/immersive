@@ -21,33 +21,34 @@ namespace Immersive.Fody
 {
     using System.Collections;
 
-    using Mono.Cecil;
-
-    public class SubstitutableAssembly : CollectionBase
+    public class Substitutables : CollectionBase
     {
-        public SubstitutableAssembly(ModuleDefinition moduleDefinition)
+        public Substitutables(ModuleWeaver moduleWeaver)
         {
-            ////_assemblyDefinition.MainModule.LoadSymbols();
-            foreach (TypeDefinition typeDefinition in Helper.GetAllTypes(moduleDefinition))
+            this.ModuleWeaver = moduleWeaver;
+            var moduleDefinition = moduleWeaver.ModuleDefinition;
+
+            this.ModuleWeaver.LogInfo($"Substitutables: ${moduleDefinition.Assembly.FullName}");
+            
+            foreach (var typeDefinition in Helper.GetAllTypes(moduleDefinition))
             {
                 if (!typeDefinition.IsInterface)
                 {
-                    var substitutableClass = new SubstitutableClass(moduleDefinition, typeDefinition);
-                    List.Add(substitutableClass);
+                    var substitutableClass = new SubstitutableClass(moduleWeaver, typeDefinition);
+                    this.List.Add(substitutableClass);
                 }
             }
         }
 
-        public SubstitutableClass this[int index]
-        {
-            get { return (SubstitutableClass)this.List[index]; }
-        }
+        public ModuleWeaver ModuleWeaver { get; }
+
+        public SubstitutableClass this[int index] => (SubstitutableClass)this.List[index];
 
         public void Substitute(Substitutes substitutes)
         {
-            foreach (SubstitutableClass binaryType in this)
+            foreach (SubstitutableClass substitutableClass in this)
             {
-                binaryType.Substitute(substitutes);
+                substitutableClass.Substitute(substitutes);
             }
         }
     }

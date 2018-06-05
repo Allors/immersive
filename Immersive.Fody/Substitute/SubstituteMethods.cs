@@ -26,27 +26,30 @@ namespace Immersive.Fody
 
     public class SubstituteMethods : CollectionBase
     {
-        private readonly ModuleDefinition moduleDefinition;
-
-        internal SubstituteMethods(ModuleDefinition moduleDefinition)
+        internal SubstituteMethods(ModuleWeaver moduleWeaver, ModuleDefinition moduleDefinition)
         {
-            this.moduleDefinition = moduleDefinition;
+            this.ModuleWeaver = moduleWeaver;
+            this.ModuleDefinition = moduleDefinition;
 
-            foreach (TypeDefinition typeDefinitoin in Helper.GetAllTypes(this.moduleDefinition))
+            foreach (var typeDefinitoin in Helper.GetAllTypes(this.ModuleDefinition))
             {
-                foreach (MethodDefinition methodDefinition in typeDefinitoin.Methods)
+                foreach (var methodDefinition in typeDefinitoin.Methods)
                 {
-                    foreach (CustomAttribute customAttribute in methodDefinition.CustomAttributes)
+                    foreach (var customAttribute in methodDefinition.CustomAttributes)
                     {
                         if (customAttribute.Constructor.DeclaringType.FullName.Equals(Attributes.SubstituteMethodAttribute))
                         {
-                            SubstituteMethod substitute = new SubstituteMethod(methodDefinition, customAttribute);
-                            List.Add(substitute);
+                            var substitute = new SubstituteMethod(moduleWeaver, methodDefinition, customAttribute);
+                            this.List.Add(substitute);
                         }
                     }
                 }
             }            
         }
+
+        public ModuleWeaver ModuleWeaver { get; }
+
+        public ModuleDefinition ModuleDefinition { get; }
 
         public override string ToString()
         {

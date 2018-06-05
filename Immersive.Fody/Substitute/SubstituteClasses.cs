@@ -19,49 +19,35 @@
 
 namespace Immersive.Fody
 {
-    using System;
     using System.Collections;
     using System.Linq;
-    using System.Reflection;
     using System.Text;
 
     using Mono.Cecil;
 
     public class SubstituteClasses : CollectionBase
     {
-        private readonly ModuleDefinition moduleDefinition;
-
-        internal SubstituteClasses(ModuleDefinition moduleDefinition)
+        internal SubstituteClasses(ModuleWeaver moduleWeaver, ModuleDefinition moduleDefinition)
         {
-            this.moduleDefinition = moduleDefinition;
+            this.ModuleWeaver = moduleWeaver;
+            this.Definition = moduleDefinition;
 
-            foreach (TypeDefinition typeDefinition in Helper.GetAllTypes(moduleDefinition))
+            foreach (var typeDefinition in Helper.GetAllTypes(moduleDefinition))
             {
-                var attribute = typeDefinition.CustomAttributes.FirstOrDefault(v => v.AttributeType.Name.Equals("SubstituteClassAttribute"));
+                var attribute = typeDefinition.CustomAttributes.FirstOrDefault(v => v.AttributeType.FullName.Equals(Attributes.SubstituteClassAttribute));
                 if (attribute != null)
                 {
-                    SubstituteClass substitute = new SubstituteClass(typeDefinition);
-                    InnerList.Add(substitute);
+                    var substitute = new SubstituteClass(moduleWeaver, typeDefinition);
+                    this.InnerList.Add(substitute);
                 }
             }
         }
 
-        public override string ToString()
-        {
-            StringBuilder toString = new StringBuilder();
-            foreach (SubstituteClass substituteClass in this)
-            {
-                toString.Append(substituteClass.ToString());
-                toString.Append("\n");
-            }
+        public ModuleWeaver ModuleWeaver { get; set; }
 
-            return toString.ToString();
-        }
+        public ModuleDefinition Definition { get; }
 
-        public SubstituteClass this[int index]
-        {
-            get { return (SubstituteClass)List[index]; }
-        }
+        public SubstituteClass this[int index] => (SubstituteClass)this.List[index];
 
         public SubstituteClass this[string typeFullName]
         {
@@ -78,6 +64,19 @@ namespace Immersive.Fody
                 return null;
             }
         }
+
+        public override string ToString()
+        {
+            var toString = new StringBuilder();
+            foreach (SubstituteClass substituteClass in this)
+            {
+                toString.Append(substituteClass);
+                toString.Append("\n");
+            }
+
+            return toString.ToString();
+        }
+
 
         public SubstituteClass LookupBySubstitutableFullName(string substitutableFullName)
         {
